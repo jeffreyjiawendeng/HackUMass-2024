@@ -12,4 +12,5 @@ if __name__ == "__main__":
     host = "127.0.0.1"
     port_number = 8080 
 
+    # app.run(debug=True)
     app.run(host, port_number)
