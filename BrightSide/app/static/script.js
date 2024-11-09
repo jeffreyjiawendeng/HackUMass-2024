@@ -8,7 +8,7 @@
   let isEnabled = false;
 
   function toggleEnabled(){
-    window.alert("asdasd");    
+    window.alert(isEnabled);    
     // document.write("hi")
     isEnabled = !isEnabled;
   }
