@@ -3,7 +3,9 @@
 (function(){
     // alert("sagasfgfsdg");
   const http = new XMLHttpRequest();
-  const camera = document.createElement('camera');
+//   const camera = document.createElement('camera');
+  const camera = document.getElementById('camera');
+
   camera.videoWidth = 200;
   camera.videoHeight = 200;
   const enableButton = document.querySelector(".Enable");
@@ -63,10 +65,11 @@
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
         // camera = document.getElementById('camera');
         camera.srcObject = stream;
+
         camera.play();
         isEnabled = true;
         window.alert("enabling camera");
-        context.drawImage(camera, 0, 0);
+        context.drawImage(camera, 0, 0, canvas.width, canvas.height);
         // window.alert(isEnabled);
         return;
 
