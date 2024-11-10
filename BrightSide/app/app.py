@@ -4,18 +4,24 @@ import base64
 import json
 from PIL import Image
 import google.generativeai as genai
+import cv2
+from keras import models
+from keras import preprocessing
+import tensorflow
+import numpy as np
 
 app = Flask(__name__)
 genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
-model = genai.GenerativeModel("gemini-1.5-flash")
+generator = genai.GenerativeModel("gemini-1.5-flash")
+
+# x = open("BrightSide/app/fer3.json", "r")
+model = models.model_from_json(open("BrightSide/app/fer3.json", "r").read())  
+#load weights  
+model.load_weights('BrightSide/app/fer3.weights.h5') 
+face_haar_cascade = cv2.CascadeClassifier("BrightSide/app/haarcascade_frontalface_default.xml")  
 
 @app.route('/')
 def root():
-    # return render_template("index.html",user_image ='default.jpg')
-    print("open app")
-    # return render_template("meme.html")
-    # return render_template("meme.html")
-    # return render_template("happy.html")
 
     return render_template("index.html")
     # return redirect("/meme")
@@ -70,7 +76,7 @@ def generateText():
     # data = request.data.decode('utf-8')
     text = data['data']
     print(text)
-    output = model.generate_content(text)
+    output = generator.generate_content(text)
     return jsonify(output.text)
 
 @app.route('/predict', methods=['POST'])
@@ -96,16 +102,77 @@ def predictions_endpoint():
         I need you to evaluate on model and set value variable below to 0 if neutral, 1 if happy, 2 if sad, 3 for mega negative emotions
         believe in frontend magic
         """
-        pil_image.save("test.jpg")
-
-        pil_image = pil_image.crop((175, 75, pil_image.width-175, pil_image.height-75))
         pil_image.save("before resize.jpg")
+        pil_image = pil_image.crop((100, 25, pil_image.width-100, pil_image.height-25))
+        pil_image.save("after resize.jpg")
 
-        pil_image = pil_image.resize((48, 48)) 
+        # pil_image = pil_image.resize((48, 48)) 
 
-        pil_image.save("test2.jpg")
-
+        test_img = np.array(pil_image)
+        test_img = test_img[:, :, ::-1].copy()
+        gray_img= cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)  
+        # gray_img = pil_image.convert("L")
+        faces_detected = face_haar_cascade.detectMultiScale(gray_img, 1.32, 5)  
+        cv2.imwrite("BrightSide/app/cv_img1.jpg", test_img) 
+        cv2.imwrite("BrightSide/app/cv_img2.jpg", gray_img) 
         value = 1   # number representation of emotion returned by function
+
+        # cv2.rectangle(test_img,(x,y),(x+w,y+h),(255,0,0),thickness=7)  
+        # roi_gray=gray_img[y:y+w,x:x+h]#cropping region of interest i.e. face area from  image  
+        roi_gray=cv2.resize(gray_img,(48,48))  
+        img_pixels = preprocessing.image.img_to_array(roi_gray)  
+        img_pixels = np.expand_dims(img_pixels, axis = 0)  
+        img_pixels /= 255  
+
+        predictions = model.predict(img_pixels)  
+
+        #find max indexed array  
+        max_index = np.argmax(predictions[0])  
+
+        emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')  
+        # predicted_emotion = emotions[max_index]
+        if(max_index == 6):
+            # value = 0
+            value = 1      # supposed to be neutral but lets switch to happy
+        elif max_index == 3 or max_index == 5:
+            value = 1
+        elif max_index == 4:
+            value = 2
+        else:
+            value = 3
+        # if max_index == 3 or max_index == 6:
+        #     value = 1
+        # else:
+        #     value = 2
+
+        print("value is " + str(value))
+        return jsonify(value)
+
+        # for (x,y,w,h) in faces_detected:  
+        #     cv2.rectangle(test_img,(x,y),(x+w,y+h),(255,0,0),thickness=7)  
+        #     roi_gray=gray_img[y:y+w,x:x+h]#cropping region of interest i.e. face area from  image  
+        #     roi_gray=cv2.resize(roi_gray,(48,48))  
+        #     img_pixels = preprocessing.image.img_to_array(roi_gray)  
+        #     img_pixels = np.expand_dims(img_pixels, axis = 0)  
+        #     img_pixels /= 255  
+
+        #     predictions = model.predict(img_pixels)  
+
+        #     #find max indexed array  
+        #     max_index = np.argmax(predictions[0])  
+
+        #     emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')  
+        #     # predicted_emotion = emotions[max_index]
+        #     if(max_index == 6):
+        #         value = 0
+        #     elif max_index == 3 or max_index == 5:
+        #         value = 1
+        #     elif max_index == 4:
+        #         value = 2
+        #     else:
+        #         value = 3
+
+        #     return jsonify(value)
 
         return jsonify(value)
     

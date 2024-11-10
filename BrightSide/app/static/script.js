@@ -15,7 +15,7 @@
   const canvas = document.querySelector('.TEST');
   canvas.style.display = "none";
 
-  const emotionHistoryMemory = 1;
+  const emotionHistoryMemory = 15;
   let counter = 0;
   let frequencies = new Array(5).fill(0);
 
@@ -188,6 +188,7 @@
                             mostFrequent = frequencies[i]
                         }
                     }
+                    window.alert(frequencies);
                     frequencies = frequencies.map(x=>0);
                     // window.alert(indexMostFrequent);
                     interpretEmotion(indexMostFrequent);
@@ -207,5 +208,5 @@
   
 
   enableButton.addEventListener("click", toggleCamera);
-  var intervalID = window.setInterval(capturePhoto, 10000);
+  var intervalID = window.setInterval(capturePhoto, 1000);
 })();
