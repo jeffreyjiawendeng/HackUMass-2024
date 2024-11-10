@@ -15,7 +15,7 @@ def root():
     print("open app")
     # return render_template("meme.html")
     # return render_template("meme.html")
-    # return render_template("ssad.html")
+    # return render_template("happy.html")
 
     return render_template("index.html")
     # return redirect("/meme")
@@ -28,6 +28,10 @@ def switch_page_to_home():
 def switch_page_to_meme():
     return redirect(url_for("meme"))
 
+@app.route('/switch_page_to_happy')
+def switch_page_to_happy():
+    return redirect(url_for("happy"))
+
 @app.route('/switch_page_to_ssad')
 def switch_page_to_ssad():
     return redirect(url_for("ssad"))
@@ -39,6 +43,10 @@ def switch_page_to_megasad():
 @app.route('/meme')
 def meme():
     return render_template("meme.html")
+
+@app.route('/happy')
+def happy():
+    return render_template("happy.html")
 
 @app.route('/ssad')
 def ssad():
@@ -91,7 +99,7 @@ def predictions_endpoint():
 
         pil_image.save("test2.jpg")
 
-        value = 2   # number representation of emotion returned by function
+        value = 1   # number representation of emotion returned by function
 
         return jsonify(value)
     
