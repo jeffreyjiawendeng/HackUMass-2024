@@ -9,7 +9,7 @@ from keras import models
 from keras import preprocessing
 import tensorflow
 import numpy as np
-from waitress import serve
+# from waitress import serve
 
 app = Flask(__name__)
 genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
@@ -194,6 +194,6 @@ if __name__ == "__main__":
     port_number = 8080 
 
     # app.run(debug=True)
-    if mode == "production":
-        serve(app, host=host, port = port_number, threads=1)
+    # if mode == "production":
+    #     serve(app, host=host, port = port_number, threads=1)
     app.run(host, port_number)
