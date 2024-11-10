@@ -7,6 +7,8 @@
   const camera = document.getElementById('camera');
 
   camera.videoWidth = 200;
+  camera.width = 200;
+  camera.height = 200;
   camera.videoHeight = 200;
   const enableButton = document.querySelector(".Enable");
 
@@ -40,6 +42,7 @@
     // if(camera.srcObject == null){
     //     return;
     // }
+    window.alert("disabling camera");
 
     const tracks = camera.srcObject.getTracks();
     
@@ -57,19 +60,18 @@
         isEnabled = false;
         window.alert("disabling camera");
         // window.alert(isEnabled);
-        disableCamera();
+        // disableCamera();
 
         return;
     }
 
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
         // camera = document.getElementById('camera');
-        camera.srcObject = stream;
-
-        camera.play();
-        isEnabled = true;
         window.alert("enabling camera");
-        context.drawImage(camera, 0, 0, canvas.width, canvas.height);
+        camera.srcObject = stream;
+        context.drawImage(camera, 0, 0);
+        isEnabled = true;
+        camera.play();
         // window.alert(isEnabled);
         return;
 
@@ -79,36 +81,51 @@
         //   window.alert(isEnabled);
         }
     });
+
     // isEnabled = !isEnabled;
   }
 
   function capturePhoto(){
     if(cameraIsOn()){
-        window.alert("enabled, capturing photo");  
+        // window.alert("enabled, capturing photo");  
 
-        // canvas.width = 200;
-        // canvas.height = 200;
+        const image = document.querySelector(".center");
+
+        window.alert(camera.srcObject == undefined || camera.srcObject == null);  
+        canvas.width = camera.videoWidth;
+        canvas.height = camera.videoHeight;
+
         context.drawImage(camera, 0, 0);
+        // context.drawImage(image, 0, 0);
+        window.alert("enabled, capturing photo");  
 
         // const imageData = canvas.toDataURL('image/png');
         const imageData = canvas.toDataURL("image/png");
-        // const image = document.createElement('img');
-        // image.src = imageData;
-        const image = document.querySelector(".center");
-        // image.src = imageData;
-        // document.body.appendChild(image);
 
+        let url = "/predict"
+    
+        http.open("POST", url) 
+      
+        http.send(imageData)
+
+        http.onload = function(){
+          
+            if (http.status === 200){
+                const response = http.responseText
+                window.alert(response);  
+              // predictionElement.textContent = `predicted class from the model: ${path}`; 
+            }else{
+                window.alert("error occured");  
+            }
+             
+          }
         
-        const a = document.createElement('a');
-        a.href = imageData;
-        a.download = "test.png";
-        a.click();
-        window.alert("end capture photo");  
-        localStorage.setItem(".center", image);
+        }
     }  
+    
 
 
-  }
+  
 
   enableButton.addEventListener("click", toggleCamera);
   var intervalID = window.setInterval(capturePhoto, 10000);
