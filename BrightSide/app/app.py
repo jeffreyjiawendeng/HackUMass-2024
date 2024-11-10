@@ -91,6 +91,12 @@ def predictions_endpoint():
         pil_image = background
         
         pil_image = pil_image.convert('RGB')    # originally rgba now rgb because png to jpg
+        """
+        JEFF AND TUAN: pil_image is pure image RGB jpg in PIL Image format,
+        I need you to evaluate on model and set value variable below to 0 if neutral, 1 if happy, 2 if sad, 3 for mega negative emotions
+        believe in frontend magic
+        """
+        pil_image.save("test.jpg")
 
         pil_image = pil_image.crop((175, 75, pil_image.width-175, pil_image.height-75))
         pil_image.save("before resize.jpg")
