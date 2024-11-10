@@ -1,6 +1,9 @@
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
 import cv2
 from utils import load_model, preprocess_face, get_emotion_prediction
-from tensorflow.keras.preprocessing import image # type: ignore
+from keras.preprocessing import image # type: ignore
 
 def main():
     model = load_model()

@@ -4,8 +4,11 @@ from tensorflow.keras.preprocessing import image # type: ignore
 from tensorflow.keras.models import model_from_json # type: ignore
 
 def load_model():
-    model = model_from_json(open("fer.json", "r").read())
-    model.load_weights('fer.weights.h5')
+    # Use a relative path to open `fer3.json`
+    with open("fer3.json", "r") as json_file:
+        model_json = json_file.read()
+    model = model_from_json(model_json)
+    model.load_weights("fer3.weights.h5")  # Load weights from file
     return model
 
 def preprocess_face(gray_img, face_coords):
