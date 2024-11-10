@@ -6,10 +6,10 @@
 //   const camera = document.createElement('camera');
   const camera = document.getElementById('camera');
 
-  camera.videoWidth = 200;
-  camera.width = 200;
-  camera.height = 200;
-  camera.videoHeight = 200;
+  camera.videoWidth = 500;
+  camera.width = 500;
+  camera.height = 500;
+  camera.videoHeight = 500;
   const enableButton = document.querySelector(".Enable");
 
   const canvas = document.querySelector('.TEST');
