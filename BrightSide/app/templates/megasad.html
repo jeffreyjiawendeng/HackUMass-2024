@@ -7,11 +7,11 @@
     </title>
 </head>
  
-<body style="background-color:rgb(67, 77, 69);">
+<body style="background-color:rgb(79, 66, 66);">
 
     <h1 style="color: white; text-align:center">You seem unhappy, how are you feeling?</h1>
 
-    <img src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F29%2F8b%2F67%2F298b6725a02988f2c55cdcb445ce5da8.jpg&f=1&nofb=1&ipt=3844c1cc216f3c9d6bee6e00ade42f70bcf9f7158b181a7e39e9ba6a5f29fff0&ipo=images" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+    <img src =  style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
 
 
     <p class = "AI_Text" id="AI_Text" style="text-align: center; color: white;">Hope you're back on your feet soon, so you can get back to being your awesome self!</p>
@@ -51,6 +51,19 @@
                     }
                 })
             }
+
+            const pics = ["https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F29%2F8b%2F67%2F298b6725a02988f2c55cdcb445ce5da8.jpg&f=1&nofb=1&ipt=3844c1cc216f3c9d6bee6e00ade42f70bcf9f7158b181a7e39e9ba6a5f29fff0&ipo=images", 
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.IyroH9ICbjnPhuwWkto8XgHaE8%26pid%3DApi&f=1&ipt=5df2af99193c9d07dfc7a23836cf69cec2ac62fa681224148b9aafd50aca86f1&ipo=images",
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.SApesWlEXdBZMukqz6poGwHaFC%26pid%3DApi&f=1&ipt=01b09c004b0bfb6eb1134d51dee7b78f618443a44924a16fa276811b0d37474c&ipo=images",
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2015%2F07%2F30%2F20%2F09%2Fcat-868297_960_720.jpg&f=1&nofb=1&ipt=5a87bdd50bf82e8e9aa257670832792f05a6dbae8f79bf8730234e67c9715c83&ipo=images",
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwheelofpets.com%2Fwp-content%2Fuploads%2F2022%2F12%2F4106-calming-cats-tips-tricks-1536x864.png&f=1&nofb=1&ipt=0897dcf2c524b2511e04b1d7e1fa8593f8f7596a74e8f298e429be24f49f4873&ipo=images"
+            ];
+            
+
+            const imgElement = document.getElementById("randomImg");
+            const randomIndex = Math.floor(Math.random() * pics.length);
+            imgElement.src = pics[randomIndex];
+
         </script>
     </marquee>
 
