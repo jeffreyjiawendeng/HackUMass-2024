@@ -1,40 +1,97 @@
+/* Basic body styling */
 body {
     background-color: lightblue;
-  }
-  
-  h1 {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container for central layout */
+.container {
+    width: 90%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Header styling */
+h1 {
+    top: 0;
+    position: fixed;
     color: white;
     text-align: center;
-  }
-  
-  p {
-    font-family: verdana;
-    font-size: 90px;
-  }
+    font-size: 2.5em;
+    /* position: inherit; */
 
-  .TOS {
-    font-size: large;
+}
+
+/* Centered image with padding */
+.image-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+/* Button styling with hover effect */
+button.Enable {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button.Enable:hover {
+    background-color: #45a049;
+}
+
+/* TOS (Terms of Service) text box */
+.TOS {
+    clear: both;
+    font-size: 3vw;
     color: navy;
-  }
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* Video and Canvas container styling */
+.video-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 20px;
+}
+#camera, #myCanvas {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+  
 
   .center {
+
+    top: 0;
+
     align-self: center;
-    margin: auto;
-    width: 50%;
-    height: 50%;
+    margin: 0;
+    width: 30%;
+    height: 30%;
     padding: 10px;
   }
 
-  button.Enable {
-    font-size: 40px; /* Set button text size */
-    padding: 10px 20px; /* Set padding to make the button bigger */
-    background-color: #4CAF50; /* Add a background color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-button.Enable:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
