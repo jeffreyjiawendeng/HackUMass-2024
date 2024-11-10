@@ -15,9 +15,9 @@
   const canvas = document.querySelector('.TEST');
   canvas.style.display = "none";
 
-  const emotionHistoryMemory = 5;
+  const emotionHistoryMemory = 1;
   let counter = 0;
-  const frequencies = new Array(20).fill(0);
+  let frequencies = new Array(5).fill(0);
 
   //   const canvas = document.querySelector('.TEST');
 //   canvas.width = 200;
@@ -48,7 +48,7 @@
     // if(camera.srcObject == null){
     //     return;
     // }
-    window.alert("disabling camera");
+    // window.alert("disabling camera");
 
     const tracks = camera.srcObject.getTracks();
     
@@ -62,14 +62,14 @@
   function toggleCamera(){    
     if(cameraIsOn()){
         isEnabled = false;
-        window.alert("disabling camera");
+        // window.alert("disabling camera");
         disableCamera();
 
         return;
     }
 
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-        window.alert("enabling camera");
+        // window.alert("enabling camera");
         camera.srcObject = stream;
         context.drawImage(camera, 0, 0);
         isEnabled = true;
@@ -78,10 +78,19 @@
 
     }).catch((error) => {
         if (error.name === 'NotAllowedError') {
-          window.alert("camera refused");
+        //   window.alert("camera refused");
         }
     });
-    
+
+    // if (Notification.permission === 'default') {
+    //     Notification.requestPermission().then(permission => {
+    //       if (permission === 'granted') {
+    //         // Permission granted, you can now show pop-ups
+    //       } else {
+    //         // Permission denied
+    //       }
+    //     });
+    //   }
   }
 
   /*
@@ -95,8 +104,7 @@
         window.alert("error occurred, emotion in interpretEmotion is not a valid value");
         return;
     }
-    window.alert("switching pages")
-
+    // window.alert("interpreting emotion")
     let url = "";
     if(emotion == 0){
         return;
@@ -114,6 +122,8 @@
     fetch(url)
     .then(response => {
         if (response.redirected) {
+            // window.open(response.url, '_blank');
+
             window.location.href = response.url; // Perform the redirect
         } else {
             // Handle the case where the route didn't redirect
@@ -141,13 +151,13 @@
         // interpretEmotion(0);
         // const image = document.querySelector(".center");
 
-        window.alert(camera.srcObject == undefined || camera.srcObject == null);  
+        // window.alert(camera.srcObject == undefined || camera.srcObject == null);  
         canvas.width = camera.videoWidth;
         canvas.height = camera.videoHeight;
 
         context.drawImage(camera, 0, 0);
         // context.drawImage(image, 0, 0);
-        window.alert("enabled, capturing photo");  
+        // window.alert("enabled, capturing photo");  
 
         // const imageData = canvas.toDataURL('image/png');
         const imageData = canvas.toDataURL("image/png");
@@ -161,15 +171,23 @@
         http.onload = function(){
           
             if (http.status === 200){
-                const response = http.responseText
-                window.alert(response);  
+                const response = parseInt(http.responseText);
                 frequencies[response]++;
                 counter++;
                 if(counter >= emotionHistoryMemory){
                     counter = 0;
                     let mostFrequent = 0;
-                    frequencies.forEach(x => mostFrequent = Math.max(mostFrequent, x));
-                    interpretEmotion(mostFrequent);
+                    let indexMostFrequent = 0;
+                    
+                    for(let i = 0; i < frequencies.length; i++){
+                        if(frequencies[i] > mostFrequent){
+                            indexMostFrequent = i;
+                            mostFrequent = frequencies[i]
+                        }
+                    }
+                    frequencies = frequencies.map(x=>0);
+                    // window.alert(indexMostFrequent);
+                    interpretEmotion(indexMostFrequent);
                 }
               // predictionElement.textContent = `predicted class from the model: ${path}`; 
             }else{

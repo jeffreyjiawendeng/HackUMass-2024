@@ -68,7 +68,7 @@ def predictions_endpoint():
 
         pil_image.save("test2.jpg")
 
-        value = 5   # number representation of emotion returned by function
+        value = 1   # number representation of emotion returned by function
 
         return jsonify(value)
     
