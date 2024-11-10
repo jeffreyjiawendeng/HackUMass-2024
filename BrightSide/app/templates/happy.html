@@ -3,31 +3,49 @@
  
 <head>
     <title>
-        MEGA SAD
+        HAPPY
     </title>
 </head>
  
 <body style="background-color:rgb(67, 77, 69);">
 
-    <h1 style="color: white; text-align:center">You seem less optimistic than usual</h1>
+    <h1 style="color: white; text-align:center">You seem happy!</h1>
 
-    <img src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F29%2F8b%2F67%2F298b6725a02988f2c55cdcb445ce5da8.jpg&f=1&nofb=1&ipt=3844c1cc216f3c9d6bee6e00ade42f70bcf9f7158b181a7e39e9ba6a5f29fff0&ipo=images" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+    <img src = "https://ih1.redbubble.net/image.5524686591.1356/raf,360x360,075,t,fafafa:ca443f4786.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
 
 
-    <p class = "AI_Text" id="AI_Text" style="text-align: center; color: white;">Hope you're back on your feet soon, so you can get back to being your awesome self!</p>
+    <p class = "AI_Text" id="AI_Text" style="text-align: center; color: white;">Great to see you well! Keep it up!</p>
 
     <marquee   behavior="slide" direction="right" scrollamount="6" width = 50%>
+        <!-- <button class="Return" ><a href="index.html">Return</a></button> -->
         <button class="Return" >Return</button>
         <script>
             var button = document.querySelector(".Return");
             var ai_text = document.getElementById("AI_Text");
+            // window.alert("asdasd")
 
+            // let url = "/generate"
+            // const http = new XMLHttpRequest();
+
+            // http.open("POST", url) 
+            
+            // http.send(JSON.stringify({data: "cheer me up I had a bad day in one sentence"}))
+
+            // http.onload = function(){
+            
+            //     if (http.status === 200){
+            //         const response = http.responseText;
+            //         ai_text.innerText = response;
+            //         window.alert(response);
+            //     }
+            // }
+    
             fetch('/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data: "cheer me up I look sad in two sentences" })
+                body: JSON.stringify({ data: "cheer me up I look happy in two sentences" })
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -53,10 +71,6 @@
             }
         </script>
     </marquee>
-
-
-
-
 
 
     <!-- <script src="script.js"></script> -->

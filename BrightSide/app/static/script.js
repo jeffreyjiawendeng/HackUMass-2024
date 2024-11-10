@@ -82,15 +82,15 @@
         }
     });
 
-    // if (Notification.permission === 'default') {
-    //     Notification.requestPermission().then(permission => {
-    //       if (permission === 'granted') {
-    //         // Permission granted, you can now show pop-ups
-    //       } else {
-    //         // Permission denied
-    //       }
-    //     });
-    //   }
+    if (Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            // Permission granted, you can now show pop-ups
+          } else {
+            // Permission denied
+          }
+        });
+      }
   }
 
   /*
@@ -110,7 +110,10 @@
         return;
     }
     else if(emotion == 1){
+      url = '/switch_page_to_happy';
+      if(Math.random() * 100 <= 1){
         url = '/switch_page_to_meme';
+      }
     }
     else if(emotion == 2){
         url = '/switch_page_to_ssad';
@@ -122,7 +125,7 @@
     fetch(url)
     .then(response => {
         if (response.redirected) {
-            // window.open(response.url, '_blank');
+            window.open(response.url, '_blank');
 
             window.location.href = response.url; // Perform the redirect
         } else {
