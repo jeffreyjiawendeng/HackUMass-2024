@@ -1,0 +1,141 @@
+/* Basic body styling */
+body {
+    min-width: 650px; /* Set your desired minimum width */
+    min-height: 600px; /* Set your desired minimum height */
+    overflow: auto; /* Allow scrolling if window is smaller than min size */
+
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container for central layout */
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.meat {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Header styling */
+h1 {
+
+    top: 0;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 3.5vw;
+    /* position: inherit; */
+
+}
+
+/* Centered image with padding */
+.image-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* button.Enable:hover, 
+button.Enable:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff,0);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+} */
+
+
+/* Button styling with hover effect */
+button.Enable {
+    margin-bottom: 10%;
+    font-size: 1.85em;
+    padding: 20px 20px;
+    background-color: #ecc387;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    border-radius: 16px;
+    
+}
+
+button.Enable:active {
+    background-color: #b27417;
+    
+}
+
+button.Enable:hover {
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgb(255, 145, 0); /* Starting box shadow */
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(238, 255, 2, 0.636); /* Expanded shadow */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 234, 2, 0.142); /* Reset to original */
+    }
+}
+
+
+/* TOS (Terms of Service) text box */
+.TOS {
+    clear: both;
+    font-size: 1vw;
+    color: navy;
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* Video and Canvas container styling */
+.video-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 20px;
+}
+#camera, #myCanvas {
+    border: 3px solid #000000;
+    border-radius: 100px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+  
+
+  .center {
+
+    top: 0;
+
+    align-self: center;
+    margin: 0;
+    width: 30%;
+    height: 30%;
+    padding: 10px;
+  }
+
