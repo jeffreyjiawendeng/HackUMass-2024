@@ -59,68 +59,80 @@
     camera.srcObject = null;
   }
 
-  function toggleCamera(){
-    interpretEmotion(0);
-    
+  function toggleCamera(){    
     if(cameraIsOn()){
         isEnabled = false;
         window.alert("disabling camera");
-        // window.alert(isEnabled);
         disableCamera();
 
         return;
     }
 
     navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-        // camera = document.getElementById('camera');
         window.alert("enabling camera");
         camera.srcObject = stream;
         context.drawImage(camera, 0, 0);
         isEnabled = true;
         camera.play();
-        // window.alert(isEnabled);
         return;
 
     }).catch((error) => {
         if (error.name === 'NotAllowedError') {
           window.alert("camera refused");
-        //   window.alert(isEnabled);
         }
     });
     
-    // isEnabled = !isEnabled;
   }
 
   /*
     0 is neutral
     1 is happy
     2 is sad
-    3 is angry
+    3 is angry/mega sad
   */
   async function interpretEmotion(emotion){
-    switch(emotion){
-        case 0:
-            window.alert("switching pages")
-
-            let url = "/meme";
-            const response = await fetch(url);
-            // http.open("GET", url);
-            // http.open(url);
-            http.send();
-            http.onload = function(){
-
-            }
-
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        default:
-            window.alert("error occurred, emotion in interpretEmotion is not a valid value")
+    if(emotion < 0 || emotion > 3 || Math.floor(emotion) !== emotion){
+        window.alert("error occurred, emotion in interpretEmotion is not a valid value");
+        return;
     }
+    window.alert("switching pages")
+
+    let url = "";
+    if(emotion == 0){
+        return;
+    }
+    else if(emotion == 1){
+        url = '/switch_page_to_meme';
+    }
+    else if(emotion == 2){
+        url = '/switch_page_to_ssad';
+    }
+    else if(emotion == 3){
+        url = '/switch_page_to_megasad';
+    }
+
+    fetch(url)
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url; // Perform the redirect
+        } else {
+            // Handle the case where the route didn't redirect
+            console.log('No redirect occurred');
+        }
+    })
+
+    // let url = "/switch";
+    // http.open("GET", url);
+    // // http.open(url);
+    // http.send();
+
+    // http.onload = function(){
+    //     if (http.status === 200){
+    //         const response = http.responseText;
+    //         window.alert(response);
+    //         window.location.href = response;
+    //     }
+    // }
   }
 
   function capturePhoto(){

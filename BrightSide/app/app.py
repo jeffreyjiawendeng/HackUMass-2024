@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, current_app, redirect
+from flask import Flask, jsonify, request, render_template, current_app, redirect, url_for
 from io import BytesIO
 import base64
 import json
@@ -12,16 +12,35 @@ def root():
     print("open app")
     # return render_template("meme.html")
     # return render_template("meme.html")
-
     return render_template("index.html")
+    # return redirect("/meme")
 
 # @app.route('/switch')
-@app.route('/meme', methods=['GET', 'POST'])
-def switch_page():
-    print("asdkbjfslkgkdfbgdkgnkdfg")
-    # return redirect("meme.html")
+@app.route('/switch_page_to_meme')
+def switch_page_to_meme():
+    return redirect(url_for("meme"))
 
+@app.route('/switch_page_to_ssad')
+def switch_page_to_ssad():
+    return redirect(url_for("ssad"))
+
+@app.route('/switch_page_to_megasad')
+def switch_page_to_megasad():
+    return redirect(url_for("megasad"))
+
+@app.route('/meme')
+def meme():
     return render_template("meme.html")
+
+@app.route('/ssad')
+def ssad():
+    return render_template("ssad.html")
+
+@app.route('/megasad')
+def megasad():
+    return render_template("megasad.html")
+
+
 
 @app.route('/predict', methods=['POST'])
 def predictions_endpoint():
