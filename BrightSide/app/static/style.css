@@ -63,14 +63,14 @@ button.Enable:focus {
 
 /* Button styling with hover effect */
 button.Enable {
-    font-size: 3em;
+    font-size: 1.85em;
     padding: 10px 20px;
     background-color: #ecc387;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 16px;
     
 }
 
@@ -85,10 +85,10 @@ button.Enable:hover {
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgb(255, 0, 0); /* Starting box shadow */
+        box-shadow: 0 0 0 0 rgb(255, 145, 0); /* Starting box shadow */
     }
     50% {
-        box-shadow: 0 0 0 10px rgba(250, 167, 0, 0.636); /* Expanded shadow */
+        box-shadow: 0 0 0 10px rgba(238, 255, 2, 0.636); /* Expanded shadow */
     }
     100% {
         box-shadow: 0 0 0 0 rgba(255, 234, 2, 0.142); /* Reset to original */
