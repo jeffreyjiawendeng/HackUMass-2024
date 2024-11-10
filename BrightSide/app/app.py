@@ -9,6 +9,7 @@ from keras import models
 from keras import preprocessing
 import tensorflow
 import numpy as np
+from waitress import serve
 
 app = Flask(__name__)
 genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
@@ -138,8 +139,10 @@ def predictions_endpoint():
             value = 1
         elif max_index == 4:
             value = 2
-        else:
+        elif max_index == 0:
             value = 3
+        else:
+            value = 1
         # if max_index == 3 or max_index == 6:
         #     value = 1
         # else:
@@ -176,9 +179,11 @@ def predictions_endpoint():
 
         return jsonify(value)
     
+mode = "development"
+
 if __name__ == "__main__":
 
-
+    mode = "production"
 
     # genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
     # model = genai.GenerativeModel("gemini-1.5-flash")
@@ -189,4 +194,6 @@ if __name__ == "__main__":
     port_number = 8080 
 
     # app.run(debug=True)
+    if mode == "production":
+        serve(app, host=host, port = port_number, threads=1)
     app.run(host, port_number)
