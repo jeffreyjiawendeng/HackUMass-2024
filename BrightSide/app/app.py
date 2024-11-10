@@ -3,8 +3,11 @@ from io import BytesIO
 import base64
 import json
 from PIL import Image
+import google.generativeai as genai
 
 app = Flask(__name__)
+genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 @app.route('/')
 def root():
@@ -12,6 +15,8 @@ def root():
     print("open app")
     # return render_template("meme.html")
     # return render_template("meme.html")
+    # return render_template("ssad.html")
+
     return render_template("index.html")
     # return redirect("/meme")
 
@@ -47,6 +52,18 @@ def megasad():
 def home():
     return render_template("index.html")
 
+@app.route('/generate', methods = ['POST'])
+def generateText():
+    print("test generate")
+    # data = request.form()
+    data = request.get_json()
+    print("after")
+    # text = data['data']
+    # data = request.data.decode('utf-8')
+    text = data['data']
+    print(text)
+    output = model.generate_content(text)
+    return jsonify(output.text)
 
 @app.route('/predict', methods=['POST'])
 def predictions_endpoint():
@@ -74,12 +91,19 @@ def predictions_endpoint():
 
         pil_image.save("test2.jpg")
 
-        value = 1   # number representation of emotion returned by function
+        value = 2   # number representation of emotion returned by function
 
         return jsonify(value)
     
 if __name__ == "__main__":
-    
+
+
+
+    # genai.configure(api_key="AIzaSyBkdAFRqUSFfhOe4ldTl6UBaCB0idFw3lg")
+    # model = genai.GenerativeModel("gemini-1.5-flash")
+    # response = model.generate_content("cheer me up, i had a bad day in one sentence")
+    # print(response.text)
+
     host = "127.0.0.1"
     port_number = 8080 
 
