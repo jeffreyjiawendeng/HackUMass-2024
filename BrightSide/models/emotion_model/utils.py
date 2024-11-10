@@ -23,5 +23,5 @@ def preprocess_face(gray_img, face_coords):
 def get_emotion_prediction(model, img_pixels):
     predictions = model.predict(img_pixels)
     max_index = np.argmax(predictions[0])
-    emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
+    emotions = ("angry", "disgust", "fear", "happy", "sad", "surprise", "neutral")
     return emotions[max_index]

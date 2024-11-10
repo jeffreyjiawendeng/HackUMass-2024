@@ -9,22 +9,22 @@ def preprocess_data(df):
     X_train, train_y, X_test, test_y = [], [], [], []
 
     for index, row in df.iterrows():
-        val = row['pixels'].split(" ")
+        val = row["pixels"].split(" ")
         try:
-            if 'Training' in row['Usage']:
-                X_train.append(np.array(val, 'float32'))
-                train_y.append(row['emotion'])
-            elif 'PublicTest' in row['Usage']:
-                X_test.append(np.array(val, 'float32'))
-                test_y.append(row['emotion'])
+            if "Training" in row["Usage"]:
+                X_train.append(np.array(val, "float32"))
+                train_y.append(row["emotion"])
+            elif "PublicTest" in row["Usage"]:
+                X_test.append(np.array(val, "float32"))
+                test_y.append(row["emotion"])
         except:
             print(f"Error occurred at index: {index} and row: {row}")
 
     num_labels = 7
-    X_train = np.array(X_train, 'float32')
-    train_y = np.array(train_y, 'float32')
-    X_test = np.array(X_test, 'float32')
-    test_y = np.array(test_y, 'float32')
+    X_train = np.array(X_train, "float32")
+    train_y = np.array(train_y, "float32")
+    X_test = np.array(X_test, "float32")
+    test_y = np.array(test_y, "float32")
 
     train_y = to_categorical(train_y, num_classes=num_labels)
     test_y = to_categorical(test_y, num_classes=num_labels)
@@ -55,12 +55,12 @@ def train_model(X_train, train_y, X_test, test_y, batch_size=64, epochs=30):
 
 def evaluate_model(model, X_train, train_y, X_test, test_y):
     train_score = model.evaluate(X_train, train_y, verbose=0)
-    print('Train loss:', train_score[0])
-    print('Train accuracy:', 100 * train_score[1])
+    print("Train loss:", train_score[0])
+    print("Train accuracy:", 100 * train_score[1])
     
     test_score = model.evaluate(X_test, test_y, verbose=0)
-    print('Test loss:', test_score[0])
-    print('Test accuracy:', 100 * test_score[1])
+    print("Test loss:", test_score[0])
+    print("Test accuracy:", 100 * test_score[1])
 
 def save_model(model):
     fer_json = model.to_json()
