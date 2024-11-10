@@ -13,6 +13,8 @@
   const enableButton = document.querySelector(".Enable");
 
   const canvas = document.querySelector('.TEST');
+  canvas.style.display = "none";
+  //   const canvas = document.querySelector('.TEST');
 //   canvas.width = 200;
 //   canvas.height = 200;
   const context = canvas.getContext('2d');
@@ -33,7 +35,6 @@
         }
     });
 
-    window.alert("camera is not on from cameraIsOn()");    
 
     return false;
   }
@@ -60,7 +61,7 @@
         isEnabled = false;
         window.alert("disabling camera");
         // window.alert(isEnabled);
-        // disableCamera();
+        disableCamera();
 
         return;
     }

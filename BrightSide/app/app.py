@@ -11,6 +11,7 @@ def root():
     # return render_template("index.html",user_image ='default.jpg')
     return render_template("index.html")
 
+
 @app.route('/predict', methods=['POST'])
 def predictions_endpoint():
     if request.method == 'POST':
@@ -29,6 +30,12 @@ def predictions_endpoint():
         pil_image = background
         
         pil_image = pil_image.convert('RGB')    # originally rgba now rgb because png to jpg
+
+        pil_image = pil_image.crop((175, 75, pil_image.width-175, pil_image.height-75))
+        pil_image.save("before resize.jpg")
+
+        pil_image = pil_image.resize((48, 48)) 
+
         pil_image.save("test2.jpg")
 
         value = 5123   # number representation of emotion returned by function
