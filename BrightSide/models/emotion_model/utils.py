@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import model_from_json
+from tensorflow.keras.preprocessing import image # type: ignore
+from tensorflow.keras.models import model_from_json # type: ignore
 
 def load_model():
     model = model_from_json(open("fer.json", "r").read())
