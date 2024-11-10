@@ -15,7 +15,10 @@ def root():
     return render_template("index.html")
     # return redirect("/meme")
 
-# @app.route('/switch')
+@app.route('/switch_page_to_home')
+def switch_page_to_home():
+    return redirect(url_for("home"))
+
 @app.route('/switch_page_to_meme')
 def switch_page_to_meme():
     return redirect(url_for("meme"))
@@ -40,6 +43,9 @@ def ssad():
 def megasad():
     return render_template("megasad.html")
 
+@app.route('/home')
+def home():
+    return render_template("index.html")
 
 
 @app.route('/predict', methods=['POST'])

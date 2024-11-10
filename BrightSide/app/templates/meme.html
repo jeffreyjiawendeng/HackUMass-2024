@@ -20,7 +20,25 @@
     </marquee>
 
     <marquee   behavior="slide" direction="right" scrollamount="6" width = 50%>
-        <button class="Return" ><a href="index.html">Return</a></button>
+        <!-- <button class="Return" ><a href="index.html">Return</a></button> -->
+        <button class="Return" >Return</button>
+        <script>
+            var button = document.querySelector(".Return");
+
+            button.addEventListener("click", returnHome);
+
+            function returnHome(){
+                fetch("/switch_page_to_home")
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url; // Perform the redirect
+                    } else {
+                        // Handle the case where the route didn't redirect
+                        console.log('No redirect occurred');
+                    }
+                })
+            }
+        </script>
     </marquee>
 
 
