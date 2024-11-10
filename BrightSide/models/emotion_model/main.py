@@ -1,5 +1,5 @@
 import os
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
 import cv2
 from utils import load_model, preprocess_face, get_emotion_prediction
@@ -31,9 +31,9 @@ def main():
             cv2.putText(test_img, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
         resized_img = cv2.resize(test_img, (1000, 700))
-        cv2.imshow('Facial Emotion Analysis', resized_img)
+        cv2.imshow("Facial Emotion Analysis", resized_img)
 
-        if cv2.waitKey(10) == ord('q'):
+        if cv2.waitKey(10) == ord("q"):
             break
 
     cap.release()
