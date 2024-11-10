@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, current_app
+from flask import Flask, jsonify, request, render_template, current_app, redirect
 from io import BytesIO
 import base64
 import json
@@ -9,8 +9,19 @@ app = Flask(__name__)
 @app.route('/')
 def root():
     # return render_template("index.html",user_image ='default.jpg')
+    print("open app")
+    # return render_template("meme.html")
+    # return render_template("meme.html")
+
     return render_template("index.html")
 
+# @app.route('/switch')
+@app.route('/meme', methods=['GET', 'POST'])
+def switch_page():
+    print("asdkbjfslkgkdfbgdkgnkdfg")
+    # return redirect("meme.html")
+
+    return render_template("meme.html")
 
 @app.route('/predict', methods=['POST'])
 def predictions_endpoint():
@@ -38,7 +49,7 @@ def predictions_endpoint():
 
         pil_image.save("test2.jpg")
 
-        value = 5123   # number representation of emotion returned by function
+        value = 5   # number representation of emotion returned by function
 
         return jsonify(value)
     

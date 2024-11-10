@@ -14,6 +14,11 @@
 
   const canvas = document.querySelector('.TEST');
   canvas.style.display = "none";
+
+  const emotionHistoryMemory = 5;
+  let counter = 0;
+  const frequencies = new Array(20).fill(0);
+
   //   const canvas = document.querySelector('.TEST');
 //   canvas.width = 200;
 //   canvas.height = 200;
@@ -55,8 +60,8 @@
   }
 
   function toggleCamera(){
-    window.alert(isEnabled);    
-    // document.write("hi")
+    interpretEmotion(0);
+    
     if(cameraIsOn()){
         isEnabled = false;
         window.alert("disabling camera");
@@ -82,15 +87,47 @@
         //   window.alert(isEnabled);
         }
     });
-
+    
     // isEnabled = !isEnabled;
+  }
+
+  /*
+    0 is neutral
+    1 is happy
+    2 is sad
+    3 is angry
+  */
+  async function interpretEmotion(emotion){
+    switch(emotion){
+        case 0:
+            window.alert("switching pages")
+
+            let url = "/meme";
+            const response = await fetch(url);
+            // http.open("GET", url);
+            // http.open(url);
+            http.send();
+            http.onload = function(){
+
+            }
+
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            window.alert("error occurred, emotion in interpretEmotion is not a valid value")
+    }
   }
 
   function capturePhoto(){
     if(cameraIsOn()){
         // window.alert("enabled, capturing photo");  
-
-        const image = document.querySelector(".center");
+        // interpretEmotion(0);
+        // const image = document.querySelector(".center");
 
         window.alert(camera.srcObject == undefined || camera.srcObject == null);  
         canvas.width = camera.videoWidth;
@@ -114,6 +151,14 @@
             if (http.status === 200){
                 const response = http.responseText
                 window.alert(response);  
+                frequencies[response]++;
+                counter++;
+                if(counter >= emotionHistoryMemory){
+                    counter = 0;
+                    let mostFrequent = 0;
+                    frequencies.forEach(x => mostFrequent = Math.max(mostFrequent, x));
+                    interpretEmotion(mostFrequent);
+                }
               // predictionElement.textContent = `predicted class from the model: ${path}`; 
             }else{
                 window.alert("error occured");  
