@@ -1,5 +1,9 @@
 /* Basic body styling */
 body {
+    min-width: 650px; /* Set your desired minimum width */
+    min-height: 600px; /* Set your desired minimum height */
+    overflow: auto; /* Allow scrolling if window is smaller than min size */
+
     background-color: lightblue;
     font-family: Arial, sans-serif;
     display: flex;
